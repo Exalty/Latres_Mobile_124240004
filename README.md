@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # latres
 
 A new Flutter project.
@@ -15,3 +16,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# Latres_Mobile_124240004
+>>>>>>> f6172d5668dc18860e6797fb50209fbd228acdba
