@@ -32,13 +32,40 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-          brightness: Brightness.light,
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: const Color(0xFF0F172A), // Dark slate blue
+        colorScheme: const ColorScheme.dark(
+          primary: Color(0xFF6366F1), // Indigo accent
+          secondary: Color(0xFFEC4899), // Pink accent
+          surface: Color(0xFF1E293B), // Card & surface dark slate
+          onPrimary: Colors.white,
+          onSurface: Color(0xFFF1F5F9),
         ),
         appBarTheme: const AppBarTheme(
           centerTitle: true,
           elevation: 0,
+          backgroundColor: Color(0xFF1E293B),
+          foregroundColor: Colors.white,
+          titleTextStyle: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 0.5,
+          ),
+        ),
+        cardTheme: CardThemeData(
+          color: const Color(0xFF1E293B),
+          elevation: 4,
+          shadowColor: const Color(0x66000000),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: Color(0xFF1E293B),
+          selectedItemColor: Color(0xFF6366F1),
+          unselectedItemColor: Color(0xFF94A3B8),
+          type: BottomNavigationBarType.fixed,
+          elevation: 8,
         ),
       ),
       home: isLoggedIn ? const MainPageShell() : const LoginPage(),

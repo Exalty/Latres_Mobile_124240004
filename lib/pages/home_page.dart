@@ -35,15 +35,15 @@ class _MainPageShellState extends State<MainPageShell> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home_rounded),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
+            icon: Icon(Icons.favorite_rounded),
             label: 'Favorit',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.person_rounded),
             label: 'Profil',
           ),
         ],
@@ -78,7 +78,9 @@ class _HomePageState extends State<HomePage> {
         future: _showsFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(color: Color(0xFF6366F1)),
+            );
           }
 
           if (snapshot.hasError) {
@@ -86,9 +88,12 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.error_outline, color: Colors.red, size: 48),
+                  const Icon(Icons.error_outline, color: Color(0xFFEF4444), size: 48),
                   const SizedBox(height: 8),
-                  Text('Gagal memuat data: ${snapshot.error}'),
+                  Text(
+                    'Gagal memuat data: ${snapshot.error}',
+                    style: const TextStyle(color: Color(0xFF94A3B8)),
+                  ),
                   const SizedBox(height: 12),
                   ElevatedButton(
                     onPressed: () {
@@ -96,6 +101,10 @@ class _HomePageState extends State<HomePage> {
                         _showsFuture = ApiService.fetchShows();
                       });
                     },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF6366F1),
+                      foregroundColor: Colors.white,
+                    ),
                     child: const Text('Coba Lagi'),
                   ),
                 ],
@@ -104,7 +113,12 @@ class _HomePageState extends State<HomePage> {
           }
 
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('Tidak ada show tersedia'));
+            return const Center(
+              child: Text(
+                'Tidak ada show tersedia',
+                style: TextStyle(color: Color(0xFF94A3B8)),
+              ),
+            );
           }
 
           final shows = snapshot.data!;

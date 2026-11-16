@@ -19,17 +19,17 @@ class FavoritePage extends StatelessWidget {
         valueListenable: favoritesBox.listenable(),
         builder: (context, Box box, _) {
           if (box.isEmpty) {
-            return Center(
+            return const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.favorite_border, size: 70, color: Colors.grey[400]),
-                  const SizedBox(height: 12),
+                  Icon(Icons.favorite_border, size: 70, color: Color(0xFF475569)),
+                  SizedBox(height: 12),
                   Text(
                     'Belum ada show favorit',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.grey[600],
+                      color: Color(0xFF94A3B8),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -47,10 +47,12 @@ class FavoritePage extends StatelessWidget {
               final show = favoriteShows[index];
 
               return Card(
-                elevation: 2,
+                elevation: 3,
+                color: const Color(0xFF1E293B),
                 margin: const EdgeInsets.only(bottom: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
+                  side: const BorderSide(color: Color(0xFF334155), width: 0.8),
                 ),
                 child: ListTile(
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -65,43 +67,44 @@ class FavoritePage extends StatelessWidget {
                             placeholder: (context, url) => Container(
                               width: 50,
                               height: 70,
-                              color: Colors.grey[200],
+                              color: const Color(0xFF0F172A),
                             ),
                             errorWidget: (context, url, error) => Container(
                               width: 50,
                               height: 70,
-                              color: Colors.grey[300],
-                              child: const Icon(Icons.broken_image, size: 24),
+                              color: const Color(0xFF334155),
+                              child: const Icon(Icons.broken_image, size: 24, color: Color(0xFF94A3B8)),
                             ),
                           )
                         : Container(
                             width: 50,
                             height: 70,
-                            color: Colors.grey[300],
-                            child: const Icon(Icons.tv, size: 24),
+                            color: const Color(0xFF334155),
+                            child: const Icon(Icons.tv, size: 24, color: Color(0xFF94A3B8)),
                           ),
                   ),
                   title: Text(
                     show.name,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFFF1F5F9)),
                   ),
                   subtitle: Row(
                     children: [
-                      const Icon(Icons.star, color: Colors.amber, size: 16),
+                      const Icon(Icons.star_rounded, color: Color(0xFFFBBF24), size: 18),
                       const SizedBox(width: 4),
                       Text(
                         show.rating != null ? show.rating!.toString() : 'N/A',
-                        style: const TextStyle(fontWeight: FontWeight.w500),
+                        style: const TextStyle(fontWeight: FontWeight.w500, color: Color(0xFFCBD5E1)),
                       ),
                     ],
                   ),
                   trailing: IconButton(
-                    icon: const Icon(Icons.delete_outline, color: Colors.red),
+                    icon: const Icon(Icons.delete_outline, color: Color(0xFFF43F5E)),
                     onPressed: () {
                       box.delete(show.id);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('${show.name} dihapus dari favorit'),
+                          backgroundColor: const Color(0xFFEF4444),
                           duration: const Duration(seconds: 1),
                         ),
                       );

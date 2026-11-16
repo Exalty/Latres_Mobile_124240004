@@ -44,6 +44,7 @@ class _DetailPageState extends State<DetailPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Dihapus dari Favorit'),
+            backgroundColor: Color(0xFFEF4444),
             duration: Duration(seconds: 1),
           ),
         );
@@ -52,6 +53,7 @@ class _DetailPageState extends State<DetailPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Ditambahkan ke Favorit'),
+            backgroundColor: Color(0xFF10B981),
             duration: Duration(seconds: 1),
           ),
         );
@@ -69,7 +71,9 @@ class _DetailPageState extends State<DetailPage> {
         future: _showDetailFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(color: Color(0xFF6366F1)),
+            );
           }
 
           if (snapshot.hasError) {
@@ -77,9 +81,12 @@ class _DetailPageState extends State<DetailPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.error_outline, color: Colors.red, size: 48),
+                  const Icon(Icons.error_outline, color: Color(0xFFEF4444), size: 48),
                   const SizedBox(height: 8),
-                  Text('Error: ${snapshot.error}'),
+                  Text(
+                    'Error: ${snapshot.error}',
+                    style: const TextStyle(color: Color(0xFF94A3B8)),
+                  ),
                   const SizedBox(height: 12),
                   ElevatedButton(
                     onPressed: () {
@@ -87,6 +94,10 @@ class _DetailPageState extends State<DetailPage> {
                         _showDetailFuture = ApiService.fetchShowDetail(widget.showId);
                       });
                     },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF6366F1),
+                      foregroundColor: Colors.white,
+                    ),
                     child: const Text('Coba Lagi'),
                   ),
                 ],
@@ -95,7 +106,12 @@ class _DetailPageState extends State<DetailPage> {
           }
 
           if (!snapshot.hasData) {
-            return const Center(child: Text('Data tidak ditemukan'));
+            return const Center(
+              child: Text(
+                'Data tidak ditemukan',
+                style: TextStyle(color: Color(0xFF94A3B8)),
+              ),
+            );
           }
 
           final show = snapshot.data!;
@@ -109,24 +125,26 @@ class _DetailPageState extends State<DetailPage> {
                 if (show.imageUrl != null)
                   CachedNetworkImage(
                     imageUrl: show.imageUrl!,
-                    height: 320,
+                    height: 340,
                     fit: BoxFit.cover,
                     placeholder: (context, url) => Container(
-                      height: 320,
-                      color: Colors.grey[200],
-                      child: const Center(child: CircularProgressIndicator()),
+                      height: 340,
+                      color: const Color(0xFF1E293B),
+                      child: const Center(
+                        child: CircularProgressIndicator(color: Color(0xFF6366F1)),
+                      ),
                     ),
                     errorWidget: (context, url, error) => Container(
-                      height: 320,
-                      color: Colors.grey[300],
-                      child: const Icon(Icons.broken_image, size: 64, color: Colors.grey),
+                      height: 340,
+                      color: const Color(0xFF1E293B),
+                      child: const Icon(Icons.broken_image, size: 64, color: Color(0xFF94A3B8)),
                     ),
                   )
                 else
                   Container(
                     height: 250,
-                    color: Colors.grey[300],
-                    child: const Icon(Icons.tv, size: 64, color: Colors.grey),
+                    color: const Color(0xFF1E293B),
+                    child: const Icon(Icons.tv, size: 64, color: Color(0xFF94A3B8)),
                   ),
 
                 Padding(
@@ -142,16 +160,17 @@ class _DetailPageState extends State<DetailPage> {
                             child: Text(
                               show.name,
                               style: const TextStyle(
-                                fontSize: 22,
+                                fontSize: 24,
                                 fontWeight: FontWeight.bold,
+                                color: Color(0xFFF8FAFC),
                               ),
                             ),
                           ),
                           IconButton(
                             icon: Icon(
                               isFav ? Icons.favorite : Icons.favorite_border,
-                              color: isFav ? Colors.red : Colors.grey,
-                              size: 30,
+                              color: isFav ? const Color(0xFFF43F5E) : const Color(0xFF94A3B8),
+                              size: 32,
                             ),
                             onPressed: () => _toggleFavorite(show),
                           ),
@@ -162,18 +181,19 @@ class _DetailPageState extends State<DetailPage> {
                       // Rating
                       Row(
                         children: [
-                          const Icon(Icons.star, color: Colors.amber, size: 20),
+                          const Icon(Icons.star_rounded, color: Color(0xFFFBBF24), size: 24),
                           const SizedBox(width: 6),
                           Text(
                             show.rating != null ? '${show.rating} / 10' : 'Rating: N/A',
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
+                              color: Color(0xFFE2E8F0),
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 20),
 
                       // Genres
                       if (show.genres.isNotEmpty) ...[
@@ -182,6 +202,7 @@ class _DetailPageState extends State<DetailPage> {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
+                            color: Color(0xFFF8FAFC),
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -190,12 +211,16 @@ class _DetailPageState extends State<DetailPage> {
                           runSpacing: 4,
                           children: show.genres.map((genre) {
                             return Chip(
-                              label: Text(genre),
-                              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                              label: Text(
+                                genre,
+                                style: const TextStyle(color: Color(0xFFE0E7FF), fontWeight: FontWeight.w500),
+                              ),
+                              backgroundColor: const Color(0xFF312E81),
+                              side: const BorderSide(color: Color(0xFF4338CA)),
                             );
                           }).toList(),
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 20),
                       ],
 
                       // Summary / Overview
@@ -204,6 +229,7 @@ class _DetailPageState extends State<DetailPage> {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
+                          color: Color(0xFFF8FAFC),
                         ),
                       ),
                       const SizedBox(height: 8),
@@ -211,8 +237,8 @@ class _DetailPageState extends State<DetailPage> {
                         _cleanSummary(show.summary),
                         style: const TextStyle(
                           fontSize: 14,
-                          height: 1.5,
-                          color: Colors.black87,
+                          height: 1.6,
+                          color: Color(0xFFCBD5E1),
                         ),
                       ),
                     ],
