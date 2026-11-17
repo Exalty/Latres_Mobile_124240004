@@ -1,21 +1,17 @@
-<<<<<<< HEAD
-# latres
+# Latres_Mobile_124240004 - TV Shows App
 
-A new Flutter project.
+Aplikasi Katalog Serial TV & Film yang dibangun menggunakan Flutter dengan fitur integrasi REST API, Local Storage (Hive & SharedPreferences), State Management, Local Notification, dan Location-Based Service (LBS).
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# Latres_Mobile_124240004
->>>>>>> f6172d5668dc18860e6797fb50209fbd228acdba
+## Fitur Utama
+1. **Autentikasi & Sesi Login**: Menggunakan `SharedPreferences` untuk menyimpan status login secara persisten.
+2. **Katalog Film Dinamis**: Mengambil data serial TV dari REST API TVMaze (`http`).
+3. **Detail & Sinopsis**: Menampilkan data detail, rating, genre chips, dan sinopsis lengkap.
+4. **Offline Favorites (Watchlist)**: Menyimpan serial TV favorit secara lokal dengan `Hive` & `TypeAdapter`.
+5. **Notifikasi Sistem (Local Notification)**:
+   - Notifikasi instan saat menambahkan/menghapus serial favorit.
+   - Pengingat jadwal tayang/nonton (*Scheduled Watch Reminder*) dengan durasi pilihan.
+6. **Location-Based Service (LBS)**:
+   - Mendeteksi posisi koordinat GPS pengguna secara *real-time* via `geolocator`.
+   - Mengubah koordinat GPS menjadi nama wilayah/kota (*Reverse Geocoding* via `geocoding`).
+   - Menghitung dan menampilkan rekomendasi **Bioskop Terdekat** (XXI, CGV, Cinepolis) beserta jarak tempuh (KM).
+   - Tombol shortcut rute peta langsung ke aplikasi **Google Maps** via `url_launcher`.

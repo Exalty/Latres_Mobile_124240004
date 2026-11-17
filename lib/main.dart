@@ -4,9 +4,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'models/tv_show.dart';
 import 'pages/home_page.dart';
 import 'pages/login_page.dart';
+import 'services/notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Local Notifications
+  await NotificationService.init();
+  await NotificationService.requestPermission();
 
   // Initialize Hive and register adapter
   await Hive.initFlutter();
